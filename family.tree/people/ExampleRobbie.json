@@ -1,8 +1,8 @@
 {
   "name": "ExampleRobbie",
   "dob": "01.01.1970",
-  "x": 260,
-  "y": 54,
+  "x": 387,
+  "y": 358,
   "info": "Example",
   "image": {
     "path": "gfx\\url.jpg"

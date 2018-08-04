@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,17 +13,20 @@ import java.util.Date;
 public class Tree extends JPanel implements MouseMotionListener{
     int x = 0;
     int y = 0;
+    Button button = new Button(this);
     Main m;
     Person placeHolder;
     BufferedImage bi;
-    BufferedImage bImage = new BufferedImage(1280, 1280,BufferedImage.TYPE_INT_RGB);
+    PointerInfo a = MouseInfo.getPointerInfo();
+    Point mouse = a.getLocation();
+    BufferedImage bImage = new BufferedImage(3944,2462,BufferedImage.TYPE_INT_RGB);
 
-    public Tree() {
+    public Tree() throws IOException {
         setVisible(true);
-        setSize(600,450);
+        setSize(3944,2462);
         setFocusable(true);
         addMouseMotionListener(this);
-
+        addMouseListener(button);
         try {
             bi = ImageIO.read(new File("gfx/background.png"));
 
@@ -86,8 +90,21 @@ public class Tree extends JPanel implements MouseMotionListener{
             }
         }
         g.drawImage(bImage,x,y,null);
+        button.paint(g);
     }
-
+    /*public void checkForEntry() {
+        a = MouseInfo.getPointerInfo();
+        mouse = a.getLocation();
+        for (Person p : m.people) {
+            if ((int)mouse.getX() > p.x && (int)mouse.getX() < p.x + 37 && (int)mouse.getY() > p.y && (int)mouse.getY() < p.y + 50) {
+                this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                //System.out.println("yes");
+            } else {
+                this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                //System.out.println(mouse.getX());
+            }
+        }
+    }*/
     @Override
     public void mouseDragged(MouseEvent e) {
         for(Person p : m.people){
@@ -116,4 +133,5 @@ public class Tree extends JPanel implements MouseMotionListener{
     public void mouseMoved(MouseEvent e) {
 
     }
+
 }

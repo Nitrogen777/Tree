@@ -1,6 +1,7 @@
 import com.google.gson.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,10 +45,13 @@ public class Main {
 
 
         JFrame j = new JFrame();
+        JFrame jfs = new JFrame();
 
-        j.setSize(600,450);
-        j.setVisible(true);
+        j.setSize(1280,720);
         j.setResizable(false);
+        jfs.setResizable(false);
+        jfs.setUndecorated(true);
+        jfs.setExtendedState(JFrame.MAXIMIZED_BOTH);
         j.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         j.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -69,7 +73,26 @@ public class Main {
                     System.exit(0);
                 }
         });
-        j.add(t);
 
+
+
+        while(true){
+            if(t.button.isFullScreen){
+                j.setVisible(false);
+                jfs.setVisible(true);
+                t.repaint();
+                jfs.add(t);
+                j.remove(t);
+            }
+            else{
+                j.setVisible(true);
+                jfs.setVisible(false);
+                t.repaint();
+                j.add(t);
+                jfs.remove(t);
+
+            }
+        }
     }
+
 }
