@@ -1,0 +1,10 @@
+{
+  "name": "ExampleRobbie",
+  "dob": "01.01.1970",
+  "x": 135,
+  "y": 142,
+  "info": "Example",
+  "image": {
+    "path": "gfx\\url.jpg"
+  }
+}
