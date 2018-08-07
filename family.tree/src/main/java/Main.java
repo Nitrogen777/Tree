@@ -21,11 +21,13 @@ public class Main {
             FileReader fr = new FileReader(f);
             Person p = gson.fromJson(fr,Person.class);
             people.add(p);
+            System.out.println(p.getName());
         }
         for(File f : flolder){
             FileReader fr = new FileReader(f);
             Line l = gson.fromJson(fr,Line.class);
             lines.add(l);
+            System.out.println(l.getName());
         }
     }
     public static void createJson(Person p) throws IOException {
@@ -39,6 +41,7 @@ public class Main {
         fw.close();
     }
     public static void main(String args[]) throws IOException {
+
         //Person p = new Person("Example",new Date(01-01-1970)))
         readAll();
         Tree t = new Tree();

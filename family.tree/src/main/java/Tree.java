@@ -1,32 +1,47 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Tree extends JPanel implements MouseMotionListener{
+public class Tree extends JPanel implements MouseMotionListener,MouseListener,FocusListener{
     int x = 0;
     int y = 0;
     Button button = new Button(this);
     Main m;
+    Menu menu = new Menu(this);
     Person placeHolder;
     BufferedImage bi;
+
     PointerInfo a = MouseInfo.getPointerInfo();
     Point mouse = a.getLocation();
+    JTextArea info = new JTextArea();
     BufferedImage bImage = new BufferedImage(3944,2462,BufferedImage.TYPE_INT_RGB);
+    Info learnPerson;
+    Mode mode = Mode.View;
 
     public Tree() throws IOException {
-        setVisible(true);
+        setLayout(null);
+
         setSize(3944,2462);
         setFocusable(true);
         addMouseMotionListener(this);
         addMouseListener(button);
+        addMouseListener(this);
+        addMouseListener(menu);
+        info.setFocusable(true);
+        info.setBounds(110,330,990,300);
+        info.setSize(990,300);
+        info.setLocation(110,330);
+        info.setVisible(false);
+        info.addFocusListener(this);
+        add(info);
+
+        setVisible(true);
         try {
             bi = ImageIO.read(new File("gfx/background.png"));
 
@@ -45,7 +60,8 @@ public class Tree extends JPanel implements MouseMotionListener{
         */
     }
 
-    public void paint(Graphics g){
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
         Graphics b = bImage.getGraphics();
         b.drawImage(bi,0,0,null);
         b.setColor(Color.BLACK);
@@ -89,8 +105,15 @@ public class Tree extends JPanel implements MouseMotionListener{
 
             }
         }
-        g.drawImage(bImage,x,y,null);
+        if(mode == Mode.Learn && learnPerson != null){
+        g.drawImage(learnPerson,0,0,null);
+        }
+        else {
+            g.drawImage(bImage, x, y, null);
+            menu.paint(g);
+        }
         button.paint(g);
+
     }
     /*public void checkForEntry() {
         a = MouseInfo.getPointerInfo();
@@ -116,17 +139,18 @@ public class Tree extends JPanel implements MouseMotionListener{
                 placeHolder = null;
             }
         }
-
-        if(placeHolder != null){
-            placeHolder.x = e.getX() - 18;
-            placeHolder.y = e.getY() - 25;
-        }
+        if(mode == Mode.Edit) {
+            if (placeHolder != null) {
+                placeHolder.x = e.getX() - 18;
+                placeHolder.y = e.getY() - 25;
+            }
         /*else{
             x = 2*e.getX()-x;
             y = 2*e.getY()-y;
         }*/
 
-        repaint();
+            repaint();
+        }
     }
 
     @Override
@@ -134,4 +158,67 @@ public class Tree extends JPanel implements MouseMotionListener{
 
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(mode == Mode.View) {
+            for (Person p : m.people) {
+                if (e.getX() > p.x && e.getX() < p.x + 37 && e.getY() > p.y && e.getY() < p.y + 50) {
+                    System.out.println("Clicked");
+                    try {
+                        Info shown = new Info(3944,2462,Info.TYPE_INT_RGB,p);
+                        learnPerson = shown;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    info.setText(p.getInfo());
+                    info.setVisible(true);
+                    info.setEditable(true);
+                    mode = Mode.Learn;
+                }
+            }
+            repaint();
+        }
+        if(mode == Mode.Learn) {
+                if (e.getX() > 700 && e.getX() < 1110 && e.getY() > 110 && e.getY() < 310 + 50) {
+                    if (e.getClickCount() == 2){
+                        System.out.println("Clicked");
+                        learnPerson.infoAbout.setInfo(info.getText());
+                        info.setVisible(false);
+                        info.setEditable(false);
+                        mode = Mode.View;
+                    }
+            }
+            repaint();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        info.grabFocus();
+    }
 }
