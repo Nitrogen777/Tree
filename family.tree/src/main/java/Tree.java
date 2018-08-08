@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Tree extends JPanel implements MouseMotionListener,MouseListener,FocusListener{
+public class Tree extends JPanel implements MouseMotionListener,MouseListener{
     int x = 0;
     int y = 0;
     Button button = new Button(this);
@@ -25,8 +25,8 @@ public class Tree extends JPanel implements MouseMotionListener,MouseListener,Fo
     Mode mode = Mode.View;
 
     public Tree() throws IOException {
-        setLayout(null);
 
+        setLayout(null);
         setSize(3944,2462);
         setFocusable(true);
         addMouseMotionListener(this);
@@ -38,7 +38,7 @@ public class Tree extends JPanel implements MouseMotionListener,MouseListener,Fo
         info.setSize(990,300);
         info.setLocation(110,330);
         info.setVisible(false);
-        info.addFocusListener(this);
+        info.setFont(new Font("Arial", Font.PLAIN, 26));
         add(info);
 
         setVisible(true);
@@ -212,13 +212,4 @@ public class Tree extends JPanel implements MouseMotionListener,MouseListener,Fo
 
     }
 
-    @Override
-    public void focusGained(FocusEvent e) {
-
-    }
-
-    @Override
-    public void focusLost(FocusEvent e) {
-        info.grabFocus();
-    }
 }

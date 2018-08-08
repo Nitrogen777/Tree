@@ -11,6 +11,11 @@ public class Main {
     public static ArrayList<Person> people = new ArrayList<Person>();
     public static ArrayList<Line> lines = new ArrayList<Line>();
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public static JFrame j = new JFrame();
+    public static JFrame jfs = new JFrame();
+    public static JTabbedPane jtp = new JTabbedPane();
+
+
     public static void readAll() throws FileNotFoundException {
 
         File fo = new File("people");
@@ -41,15 +46,39 @@ public class Main {
         fw.close();
     }
     public static void main(String args[]) throws IOException {
-
+        Main main = new Main();
+        try {
+            // Set System L&F
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        }
+        catch (ClassNotFoundException e) {
+            // handle exception
+        }
+        catch (InstantiationException e) {
+            // handle exception
+        }
+        catch (IllegalAccessException e) {
+            // handle exception
+        }
         //Person p = new Person("Example",new Date(01-01-1970)))
-        readAll();
         Tree t = new Tree();
+        readAll();
+        PeopleMaker pm = new PeopleMaker(t);
+        LineMaker lm = new LineMaker(t);
+        j.setVisible(true);
+        jfs.setVisible(false);
+        t.repaint();
+        j.add(jtp);
+        jfs.remove(jtp);
 
-
-        JFrame j = new JFrame();
-        JFrame jfs = new JFrame();
-
+        jtp.addTab("Tree",t);
+        jtp.addTab("Add a Person",pm);
+        jtp.addTab("Add a Line",lm);
+        j.setFocusable(true);
         j.setSize(1280,720);
         j.setResizable(false);
         jfs.setResizable(false);
@@ -78,24 +107,7 @@ public class Main {
         });
 
 
-
-        while(true){
-            if(t.button.isFullScreen){
-                j.setVisible(false);
-                jfs.setVisible(true);
-                t.repaint();
-                jfs.add(t);
-                j.remove(t);
-            }
-            else{
-                j.setVisible(true);
-                jfs.setVisible(false);
-                t.repaint();
-                j.add(t);
-                jfs.remove(t);
-
-            }
-        }
     }
+
 
 }

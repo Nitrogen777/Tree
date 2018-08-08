@@ -1,0 +1,10 @@
+{
+  "name": "FlyingKitty",
+  "dob": "Despacito 2",
+  "x": 734,
+  "y": 297,
+  "info": "Despacito",
+  "image": {
+    "path": "gfx\\url.jpg"
+  }
+}

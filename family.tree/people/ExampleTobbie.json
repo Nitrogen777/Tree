@@ -1,8 +1,8 @@
 {
   "name": "ExampleTobbie",
   "dob": "01.01.1970",
-  "x": 204,
-  "y": 132,
+  "x": 250,
+  "y": 171,
   "info": "Robbie Rotten Villain number 1",
   "image": {
     "path": "gfx\\url.jpg"
