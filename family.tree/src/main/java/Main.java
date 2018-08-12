@@ -3,8 +3,11 @@ import com.google.gson.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static java.nio.file.Files.delete;
 
 
 public class Main {
@@ -16,7 +19,7 @@ public class Main {
     public static JTabbedPane jtp = new JTabbedPane();
 
 
-    public static void readAll() throws FileNotFoundException {
+    public static void readAll() throws IOException {
 
         File fo = new File("people");
         File fu = new File("lines");
@@ -27,12 +30,14 @@ public class Main {
             Person p = gson.fromJson(fr,Person.class);
             people.add(p);
             System.out.println(p.getName());
+            fr.close();
         }
         for(File f : flolder){
             FileReader fr = new FileReader(f);
             Line l = gson.fromJson(fr,Line.class);
             lines.add(l);
             System.out.println(l.getName());
+            fr.close();
         }
     }
     public static void createJson(Person p) throws IOException {
@@ -69,6 +74,7 @@ public class Main {
         readAll();
         PeopleMaker pm = new PeopleMaker(t);
         LineMaker lm = new LineMaker(t);
+        ObjectRemover or = new ObjectRemover(t);
         j.setVisible(true);
         jfs.setVisible(false);
         t.repaint();
@@ -78,6 +84,7 @@ public class Main {
         jtp.addTab("Tree",t);
         jtp.addTab("Add a Person",pm);
         jtp.addTab("Add a Line",lm);
+        jtp.addTab("Remove an Object",or);
         j.setFocusable(true);
         j.setSize(1280,720);
         j.setResizable(false);
@@ -106,7 +113,6 @@ public class Main {
                 }
         });
 
-        
     }
 
 
