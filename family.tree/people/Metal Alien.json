@@ -1,0 +1,10 @@
+{
+  "name": "Metal Alien",
+  "dob": "01-01-01",
+  "x": 608,
+  "y": 352,
+  "info": "Despacito",
+  "image": {
+    "path": "gfx\\meg-griffin-family-guy-68.8.jpg"
+  }
+}

@@ -2,8 +2,8 @@
   "name": "ExampleHobby",
   "dob": "01.01-1970",
   "dod": "01.01-2050",
-  "x": 560,
-  "y": 281,
+  "x": 494,
+  "y": 268,
   "info": "Bla Bla Bla",
   "image": {
     "path": "gfx\\meg-griffin-family-guy-68.8.jpg"

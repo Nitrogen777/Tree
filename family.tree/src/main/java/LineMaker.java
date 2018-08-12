@@ -10,6 +10,7 @@ public class LineMaker extends JPanel{
     JComboBox p2 = new JComboBox();
     JComboBox p3 = new JComboBox();
     JButton done = new JButton("Create");
+    JButton reload = new JButton("Reload People");
     JLabel p1Label = new JLabel("Person 1");
     JLabel p2Label = new JLabel("Person 2");
     JLabel p3Label = new JLabel("Person 3 (Optional)");
@@ -63,5 +64,23 @@ public class LineMaker extends JPanel{
             }
         });
         add(done);
+        reload.setLocation(500,80);
+        reload.setSize(220,220);
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                p1.removeAllItems();
+                p2.removeAllItems();
+                p3.removeAllItems();
+                p3.addItem("No third person");
+                for(Person p : t.m.people){
+                    p1.addItem(p.getName());
+                    p2.addItem(p.getName());
+                    p3.addItem(p.getName());
+
+                }
+            }
+        });
+        add(reload);
     }
 }
