@@ -47,8 +47,8 @@ public class ObjectRemover extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 for(int i = 0; i < t.m.people.size(); ++i) {
                     if (p1.getSelectedItem().equals(t.m.people.get(i).getName())) {
-                        System.out.println((new File("people\\" + t.m.people.get(i).getName() + ".json")));
-                        System.out.println((new File("people\\" + t.m.people.get(i).getName() + ".json")).delete());
+                        System.out.println((new File("people/" + t.m.people.get(i).getName() + ".json")));
+                        System.out.println((new File("people/" + t.m.people.get(i).getName() + ".json")).delete());
                         p1.removeItem(t.m.people.get(i).getName());
                         t.m.people.remove(t.m.people.get(i));
 
@@ -65,8 +65,8 @@ public class ObjectRemover extends JPanel{
             public void actionPerformed(ActionEvent e){
                 for(int i = 0; i < t.m.lines.size(); ++i) {
                     if (p2.getSelectedItem().equals(t.m.lines.get(i).getName())) {
-                        System.out.println((new File("lines\\" + t.m.lines.get(i).getName() + ".json")));
-                        System.out.println((new File("lines\\" + t.m.lines.get(i).getName() + ".json")).delete());
+                        System.out.println((new File("lines/" + t.m.lines.get(i).getName() + ".json")));
+                        System.out.println((new File("lines/" + t.m.lines.get(i).getName() + ".json")).delete());
                         p2.removeItem(t.m.lines.get(i).getName());
                         t.m.lines.remove(t.m.lines.get(i));
 

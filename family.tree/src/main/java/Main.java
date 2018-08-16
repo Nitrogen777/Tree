@@ -1,5 +1,6 @@
 import com.google.gson.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -14,7 +15,7 @@ public class Main {
     public static ArrayList<Person> people = new ArrayList<Person>();
     public static ArrayList<Line> lines = new ArrayList<Line>();
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public static JFrame j = new JFrame();
+    public static JFrame j = new JFrame("Your Family Tree");
     public static JFrame jfs = new JFrame();
     public static JTabbedPane jtp = new JTabbedPane();
 
@@ -75,6 +76,9 @@ public class Main {
         PeopleMaker pm = new PeopleMaker(t);
         LineMaker lm = new LineMaker(t);
         ObjectRemover or = new ObjectRemover(t);
+        j.setIconImage(
+                ImageIO.read(new File("gfx/1200px-Flag_of_Israel.svg.png"))
+        );
         j.setVisible(true);
         jfs.setVisible(false);
         t.repaint();

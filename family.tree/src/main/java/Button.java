@@ -17,8 +17,8 @@ public class Button implements MouseListener{
     BufferedImage fs;
     public Button(Tree t) throws IOException {
         this.t = t;
-        ss = ImageIO.read(new File("gfx\\largescreen.png"));
-        fs = ImageIO.read(new File("gfx\\smolscreen.png"));
+        ss = ImageIO.read(new File("gfx/largescreen.png"));
+        fs = ImageIO.read(new File("gfx/smolscreen.png"));
 
     }
 
